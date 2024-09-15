@@ -9,7 +9,3 @@ export interface Image {
     likes: number,
 }
 
-// export interface OpenModalEl {
-//     urls: string,
-//     alt: string,
-// }
