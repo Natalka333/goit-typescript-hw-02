@@ -1,7 +1,16 @@
 import Modal from 'react-modal';
 import css from './ImageModal.module.css'
+import { FC } from 'react';
 
-const ImageModal = ({ urls, alt_description, isOpen, onRequestClose }) => {
+interface ImageModalProps {
+    urls: string,
+    alt_description: string,
+    isOpen: boolean;
+
+    onRequestClose: () => void,
+}
+
+const ImageModal: FC<ImageModalProps> = ({ urls, alt_description, isOpen, onRequestClose }) => {
     const customStyles = {
         content: {
             maxWidth: '80%',

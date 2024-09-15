@@ -1,6 +1,18 @@
+import { FC } from 'react';
 import css from './ImageCard.module.css';
 
-const ImageCard = ({ color, urls, openModal, alt_description, likes }) => {
+interface ImageCardProps {
+    alt_description: string,
+    color: string,
+    urls: {
+        small: string,
+        regular: string,
+    },
+    likes: number,
+    openModal: (urls: string, alt: string, likes: number) => void,
+}
+
+const ImageCard: FC<ImageCardProps> = ({ color, urls, openModal, alt_description, likes }) => {
     return (
         <li className={css.gallery}>
             <div className={css.card} style={{ backgroundColor: color, borderColor: color }}>

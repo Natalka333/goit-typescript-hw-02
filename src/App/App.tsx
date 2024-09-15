@@ -1,27 +1,29 @@
 import { useEffect, useState, } from "react";
 
 import './App.css'
-import SearchBar from "./components/SearchBar/SearchBar";
-import Loader from "./components/Loader/Loader";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
+import SearchBar from "../components/SearchBar/SearchBar";
+import Loader from "../components/Loader/Loader";
+import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
+import ImageGallery from "../components/ImageGallery/ImageGallery";
 
-import { fetchImagesGallery } from "./components/images-api";
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-import ImageModal from "./components/ImageModal/ImageModal";
+import { fetchImagesGallery } from "../components/images-api";
+import LoadMoreBtn from "../components/LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../components/ImageModal/ImageModal";
+import { Image } from "./App.types";
+
 
 
 function App() {
-  const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1)
-  const [images, setImages] = useState([]);
+  const [query, setQuery] = useState<string>('');
+  const [page, setPage] = useState<number>(1)
+  const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [isShowModal, setIsShowModal] = useState(false);
-  const [showBtn, setShowBtn] = useState(false);
-  const [urlsModal, setUrlsModal] = useState('')
-  const [altModal, setAltModal] = useState('')
+  const [error, setError] = useState<string | null>(null);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const [showBtn, setShowBtn] = useState<boolean>(false);
+  const [urlsModal, setUrlsModal] = useState<string>('')
+  const [altModal, setAltModal] = useState<string>('')
 
 
 
@@ -43,8 +45,12 @@ function App() {
         setImages((prevImages) => [...prevImages, ...results])
         setShowBtn(total_pages && total_pages !== page)
 
-      } catch (error) {
-        setError(error);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError(String(error));
+        }
       } finally {
         setLoading(false)
       }
@@ -53,7 +59,7 @@ function App() {
   }, [query, page]);
 
 
-  const handleSearch = (value) => {
+  const handleSearch = (value: string) => {
     setQuery(value);
     setImages([]);
     setPage(1);
@@ -66,7 +72,7 @@ function App() {
     setPage((prevPage) => prevPage + 1)
   }
 
-  const OpenModal = (urls, alt) => {
+  const OpenModal = (urls: string, alt: string) => {
     setIsShowModal(true)
     setUrlsModal(urls)
     setAltModal(alt)
