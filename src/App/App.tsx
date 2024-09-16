@@ -17,7 +17,7 @@ function App() {
   const [query, setQuery] = useState<string>('');
   const [page, setPage] = useState<number>(1)
   const [images, setImages] = useState<Image[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
@@ -38,19 +38,15 @@ function App() {
       setError(null);
       try {
         const { results, total_pages } = await fetchImagesGallery(query, page);
-        // console.log(results)
+        console.log(results)
         if (!results.length) {
           return setIsEmpty(true);
         }
         setImages((prevImages) => [...prevImages, ...results])
         setShowBtn(total_pages && total_pages !== page)
 
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError(String(error));
-        }
+      } catch (error) {
+        setError(error);
       } finally {
         setLoading(false)
       }

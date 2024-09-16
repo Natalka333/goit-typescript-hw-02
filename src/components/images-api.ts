@@ -5,7 +5,7 @@ const API_KEY = '2uRalbC6V6zEmQlQVJzmTNHi3iZgCca44F07nlHrTI8'
 
 
 
-export const fetchImagesGallery = async (query, page) => {
+export const fetchImagesGallery = async (query: string, page: number) => {
     const { data } = await axios.get(`https://api.unsplash.com/search/photos/?client_id=${API_KEY}&query=${query}&page=${page}`);
     return data;
 }
