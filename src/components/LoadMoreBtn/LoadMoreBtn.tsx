@@ -1,11 +1,6 @@
 import { FC } from 'react';
 import css from './LoadMoreBtn.module.css';
-
-interface LoadMoreBtnProps {
-    children?: React.ReactNode,
-    onClick: () => void,
-    disabled: boolean,
-}
+import { LoadMoreBtnProps } from '../../App/App.types';
 
 
 const LoadMoreBtn: FC<LoadMoreBtnProps> = ({ children, onClick, disabled }) => {

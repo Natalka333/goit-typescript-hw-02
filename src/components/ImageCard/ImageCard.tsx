@@ -1,16 +1,8 @@
 import { FC } from 'react';
 import css from './ImageCard.module.css';
+import { ImageCardProps } from '../../App/App.types';
 
-interface ImageCardProps {
-    alt_description: string,
-    color: string,
-    urls: {
-        small: string,
-        regular: string,
-    },
-    likes: number,
-    openModal: (urls: string, alt: string, likes: number) => void,
-}
+
 
 const ImageCard: FC<ImageCardProps> = ({ color, urls, openModal, alt_description, likes }) => {
     return (

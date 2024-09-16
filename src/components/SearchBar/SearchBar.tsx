@@ -1,9 +1,9 @@
 import { useState, FormEvent, FC, ChangeEvent } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
-import css from './SearchBar.module.css';
-
 
 import { SearchBarProps } from '../../App/App.types';
+
+import css from './SearchBar.module.css';
 
 const SearchBar: FC<SearchBarProps> = ({ onSubmit }) => {
     const [searchQuery, setSearchQuery] = useState<string>('');
