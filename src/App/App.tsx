@@ -9,7 +9,7 @@ import ImageGallery from "../components/ImageGallery/ImageGallery";
 import { fetchImagesGallery } from "../components/images-api";
 import LoadMoreBtn from "../components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../components/ImageModal/ImageModal";
-import { Image } from "./App.types";
+import { Image, FetchImagesResponse } from "./App.types";
 
 
 
@@ -34,7 +34,7 @@ function App() {
       setLoading(true);
       setError(null);
       try {
-        const { results, total_pages } = await fetchImagesGallery(query, page);
+        const { results, total_pages }: FetchImagesResponse = await fetchImagesGallery(query, page);
         // console.log(results)
         if (!results.length) {
           return setIsEmpty(true);

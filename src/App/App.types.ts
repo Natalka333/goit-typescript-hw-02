@@ -9,3 +9,10 @@ export interface Image {
     likes: number,
 }
 
+
+export interface FetchImagesResponse {
+    results: Image[];
+    total: number;
+    total_pages: number;
+}
+
