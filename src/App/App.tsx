@@ -21,12 +21,9 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
-  const [showBtn, setShowBtn] = useState<boolean>(false);
+  const [showBtn, setShowBtn] = useState<boolean | 0>(false);
   const [urlsModal, setUrlsModal] = useState<string>('')
   const [altModal, setAltModal] = useState<string>('')
-
-
-
 
   useEffect(() => {
     if (!query) {
@@ -38,15 +35,16 @@ function App() {
       setError(null);
       try {
         const { results, total_pages } = await fetchImagesGallery(query, page);
-        console.log(results)
+        // console.log(results)
         if (!results.length) {
           return setIsEmpty(true);
         }
         setImages((prevImages) => [...prevImages, ...results])
         setShowBtn(total_pages && total_pages !== page)
 
-      } catch (error) {
-        setError(error);
+      } catch (error: any) {
+        const errorMessage = error instanceof Error ? error.message : 'Something went wrong';
+        setError(errorMessage);
       } finally {
         setLoading(false)
       }
@@ -67,6 +65,7 @@ function App() {
   const onLoadmoreBtn = () => {
     setPage((prevPage) => prevPage + 1)
   }
+
 
   const OpenModal = (urls: string, alt: string) => {
     setIsShowModal(true)
